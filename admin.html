@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KHALED PRO</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* الشريط الجانبي */
+        .sidebar {
+            width: 250px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-header h2 i {
+            margin-left: 10px;
+        }
+        
+        .nav-links {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-links a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255,255,255,0.1);
+            border-left-color: var(--secondary-color);
+        }
+        
+        .nav-links a i {
+            margin-left: 10px;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .welcome-msg h1 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-msg p {
+            color: #7f8c8d;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info .btn {
+            margin-left: 10px;
+        }
+        
+        /* الأزرار */
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-danger {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #219a52;
+        }
+        
+        /* البطاقات */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .stat-icon.blue {
+            background-color: var(--secondary-color);
+        }
+        
+        .stat-icon.green {
+            background-color: var(--success-color);
+        }
+        
+        .stat-icon.orange {
+            background-color: var(--warning-color);
+        }
+        
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        /* لوحة التحكم */
+        .dashboard-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .panel-header h2 {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+        }
+        
+        /* الجداول */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th, table td {
+            padding: 0.8rem;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .action-buttons button {
+            margin-left: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+        
+        /* النماذج */
+        .form-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* صفحة تسجيل الدخول */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 100%;
+        }
+        
+        .login-form {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--secondary-color);
+        }
+        
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 992px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .user-info {
+                margin-top: 1rem;
+            }
+            
+            .action-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .action-buttons button {
+                margin-left: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- إذا لم يكن المستخدم مسجلاً، نعرض له صفحة تسجيل الدخول -->
+    <div id="loginPage" class="login-container">
+        <div class="login-form">
+            <div class="login-logo">
+                <i class="fas fa-newspaper"></i>
+            </div>
+            <h2>تسجيل الدخول إلى لوحة التحكم</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="أدخل بريدك الإلكتروني">
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="أدخل كلمة المرور">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+            </form>
+            <div id="loginMessage" style="margin-top: 1rem; text-align: center; color: var(--accent-color);"></div>
+        </div>
+    </div>
+
+    <!-- إذا كان المستخدم مسجلاً، نعرض لوحة التحكم -->
+    <div id="dashboardPage" style="display: none; width: 100%;">
+        <!-- الشريط الجانبي -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-newspaper"></i>KHALED PRO</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a></li>
+                <li><a href="#"><i class="fas fa-plus-circle"></i> إضافة مقال جديد</a></li>
+                <li><a href="#"><i class="fas fa-edit"></i> إدارة المقالات</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+            </ul>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="main-content">
+            <div class="header">
+                <div class="welcome-msg">
+                    <h1>مرحباً، <span id="userName">مدير الموقع</span></h1>
+                    <p>هذه نظرة عامة على أداء موقعك ومقالاتك.</p>
+                </div>
+                <div class="user-info">
+                    <span id="userEmail" style="margin-left: 1rem;"></span>
+                    <button class="btn btn-primary" id="addArticleBtn">
+                        <i class="fas fa-plus"></i> مقال جديد
+                    </button>
+                </div>
+            </div>
+
+            <!-- إحصائيات سريعة -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalArticles">0</h3>
+                        <p>مقال منشور</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1,245</h3>
+                        <p>زيارة اليوم</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>563</h3>
+                        <p>مستخدم جديد</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قائمة المقالات -->
+            <div class="dashboard-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-list"></i> أحدث المقالات</h2>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> تحديث
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>العنوان</th>
+                                <th>التاريخ</th>
+                                <th>المشاهدات</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="articlesTable">
+                            <tr>
+                                <td>كيفية إنشاء موقع إلكتروني ناجح</td>
+                                <td>2023-10-15</td>
+                                <td>1,245</td>
+                                <td><span style="color: var(--success-color);">منشور</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>أفضل أدوات التصميم لعام 2023</td>
+                                <td>2023-10-10</td>
+                                <td>985</td>
+                                <td><span style="color: var(--success-color);">منشور</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>دليل شامل لأنظمة إدارة المحتوى</td>
+                                <td>2023-10-05</td>
+                                <td>1,532</td>
+                                <td><span style="color: var(--warning-color);">مسودة</span></td>
+                                <td class="action-buttons">
+                                    <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- نموذج إضافة مقال جديد (مخفي بشكل افتراضي) -->
+            <div id="addArticleForm" class="form-container" style="display: none;">
+                <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-plus-circle"></i> إضافة مقال جديد</h2>
+                <form id="articleForm">
+                    <div class="form-group">
+                        <label for="articleTitle">عنوان المقال</label>
+                        <input type="text" id="articleTitle" required placeholder="أدخل عنوان المقال">
+                    </div>
+                    <div class="form-group">
+                        <label for="articleContent">محتوى المقال</label>
+                        <textarea id="articleContent" required placeholder="اكتب محتوى المقال هنا..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="articleImage">صورة المقال (اختياري)</label>
+                        <input type="file" id="articleImage">
+                    </div>
+                    <div class="form-group">
+                        <label for="articleStatus">حالة المقال</label>
+                        <select id="articleStatus">
+                            <option value="published">منشور</option>
+                            <option value="draft">مسودة</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-danger" id="cancelArticleBtn">إلغاء</button>
+                        <button type="submit" class="btn btn-success">نشر المقال</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // استيراد وظائف Firebase التي تحتاجها
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+        // إعدادات Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5IzuVyVXAlK6uUHiZbmHVCXGW-3dvqGQ",
+            authDomain: "kh-store-13e51.firebaseapp.com",
+            projectId: "kh-store-13e51",
+            storageBucket: "kh-store-13e51.firebasestorage.app",
+            messagingSenderId: "112723162334",
+            appId: "1:112723162334:web:c79e729d8b590a56e7fe4f",
+            measurementId: "G-LXGLV97VT4"
+        };
+
+        // تهيئة Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // متابعة حالة المصادقة
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('dashboardPage').style.display = 'flex';
+                document.getElementById('userEmail').textContent = user.email;
+                loadArticles();
+            } else {
+                // User is signed out
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('dashboardPage').style.display = 'none';
+            }
+        });
+
+        // تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageElement = document.getElementById('loginMessage');
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // تم تسجيل الدخول بنجاح
+                    messageElement.textContent = '';
+                    messageElement.style.color = 'var(--success-color)';
+                })
+                .catch((error) => {
+                    // خطأ في تسجيل الدخول
+                    messageElement.textContent = 'خطأ في البريد الإلكتروني أو كلمة المرور';
+                    messageElement.style.color = 'var(--accent-color)';
+                });
+        });
+
+        // تسجيل الخروج
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            signOut(auth);
+        });
+
+        // إظهار/إخفاء نموذج إضافة مقال
+        document.getElementById('addArticleBtn').addEventListener('click', () => {
+            document.getElementById('addArticleForm').style.display = 'block';
+        });
+
+        document.getElementById('cancelArticleBtn').addEventListener('click', () => {
+            document.getElementById('addArticleForm').style.display = 'none';
+        });
+
+        // إضافة مقال جديد
+        document.getElementById('articleForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const title = document.getElementById('articleTitle').value;
+            const content = document.getElementById('articleContent').value;
+            const status = document.getElementById('articleStatus').value;
+            
+            addDoc(collection(db, "articles"), {
+                title: title,
+                content: content,
+                status: status,
+                createdAt: new Date().toISOString(),
+                views: 0
+            })
+            .then(() => {
+                alert('تم إضافة المقال بنجاح!');
+                document.getElementById('articleForm').reset();
+                document.getElementById('addArticleForm').style.display = 'none';
+                loadArticles(); // إعادة تحميل المقالات
+            })
+            .catch((error) => {
+                console.error("Error adding article: ", error);
+                alert('حدث خطأ أثناء إضافة المقال');
+            });
+        });
+
+        // تحميل المقالات من Firebase
+        async function loadArticles() {
+            const querySnapshot = await getDocs(collection(db, "articles"));
+            const articlesTable = document.getElementById('articlesTable');
+            const totalArticles = document.getElementById('totalArticles');
+            
+            // تحديث عدد المقالات
+            totalArticles.textContent = querySnapshot.size;
+            
+            // مسح الجدول الحالي
+            articlesTable.innerHTML = '';
+            
+            // إضافة المقالات إلى الجدول
+            querySnapshot.forEach((doc) => {
+                const article = doc.data();
+                const articleId = doc.id;
+                
+                const tr = document.createElement('tr');
+                
+                tr.innerHTML = `
+                    <td>${article.title}</td>
+                    <td>${new Date(article.createdAt).toLocaleDateString('ar-EG')}</td>
+                    <td>${article.views || 0}</td>
+                    <td><span style="color: ${article.status === 'published' ? 'var(--success-color)' : 'var(--warning-color)'};">${article.status === 'published' ? 'منشور' : 'مسودة'}</span></td>
+                    <td class="action-buttons">
+                        <button class="btn btn-primary" onclick="editArticle('${articleId}')"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger" onclick="deleteArticle('${articleId}')"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                
+                articlesTable.appendChild(tr);
+            });
+        }
+
+        // حذف مقال
+        window.deleteArticle = async function(articleId) {
+            if (confirm('هل أنت متأكد من رغبتك في حذف هذا المقال؟')) {
+                try {
+                    await deleteDoc(doc(db, "articles", articleId));
+                    alert('تم حذف المقال بنجاح!');
+                    loadArticles(); // إعادة تحميل المقالات
+                } catch (error) {
+                    console.error("Error deleting article: ", error);
+                    alert('حدث خطأ أثناء حذف المقال');
+                }
+            }
+        }
+
+        // تحرير مقال (وظيفة أساسية)
+        window.editArticle = function(articleId) {
+            alert('ميزة التعديل قيد التطوير حالياً. المقال: ' + articleId);
+        }
+    </script>
+</body>
+</html>
